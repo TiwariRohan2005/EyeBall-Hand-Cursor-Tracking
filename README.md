@@ -174,13 +174,11 @@ python manage_users.py revoke "User_Name"
 
 # Future Enhancements
 
-- Voice Commands
 - Multi-user Profiles
 - Head Pose Tracking
 - Custom Gesture Training
 - AI-based Personalization
-- Desktop Installer
-- Cross-platform Support
+- Real-World Program Integration
 
 ---
 
