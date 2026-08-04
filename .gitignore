@@ -1,0 +1,49 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+venv/
+venv_broken/
+.env
+.venv/
+
+# IDE
+.vscode/
+.idea/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+auth_logs.log
+
+# User Authentication Data
+.user_profiles.enc
+
+# Temporary Files
+*.tmp
+*.temp
+
+# Python Packaging
+build/
+dist/
+*.egg-info/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Misc
+*.bak
+*.swp

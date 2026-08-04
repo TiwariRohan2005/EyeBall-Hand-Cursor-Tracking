@@ -2,3 +2,4 @@ opencv-python
 mediapipe
 pyautogui
 numpy
+cryptography

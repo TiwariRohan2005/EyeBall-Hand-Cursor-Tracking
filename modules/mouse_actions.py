@@ -4,32 +4,34 @@ import numpy as np
 class MouseController:
     def __init__(self):
         pyautogui.FAILSAFE = True
+        pyautogui.PAUSE = 0  # Disable pyautogui's built-in pause for smoother streaming
         self.screen_w, self.screen_h = pyautogui.size()
-        self.smooth = 7
 
-    def handle(self, status, hand_pos, frame_shape, prev_x, prev_y):
+    def handle(self, status, smoothed_pos, frame_shape):
 
         if status == "PAUSE":
-            return prev_x, prev_y
+            return
 
-        if hand_pos:
-            x, y = hand_pos
+        if smoothed_pos:
+            x, y = smoothed_pos
             h, w, _ = frame_shape
 
+            # Map stabilized camera coordinates directly to screen
             screen_x = np.interp(x, (0, w), (0, self.screen_w))
             screen_y = np.interp(y, (0, h), (0, self.screen_h))
 
-            curr_x = prev_x + (screen_x - prev_x) / self.smooth
-            curr_y = prev_y + (screen_y - prev_y) / self.smooth
-
-            pyautogui.moveTo(curr_x, curr_y)
-
-            prev_x, prev_y = curr_x, curr_y
+            pyautogui.moveTo(screen_x, screen_y)
 
         if status == "LEFT_CLICK":
             pyautogui.click()
 
         elif status == "RIGHT_CLICK":
             pyautogui.rightClick()
-
-        return prev_x, prev_y
+            
+        elif status == "SCROLL_MODE":
+            # For now, let's just trigger a small static scroll down as a proof of concept
+            pyautogui.scroll(-200)
+            
+        elif status == "VIRTUAL_KEYBOARD":
+            # Placeholder for virtual keyboard
+            pass

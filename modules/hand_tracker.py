@@ -25,18 +25,21 @@ class HandTracker:
 
         result = self.detector.detect(mp_image)
 
-        hand_pos = None
+        hand_data = None
+        landmarks_list = None
 
-        if result.hand_landmarks:
+        if result.hand_landmarks and result.handedness:
             h, w, _ = frame.shape
 
-            landmark = result.hand_landmarks[0][8]   # index fingertip
+            landmarks_list = result.hand_landmarks[0]
+            landmark = landmarks_list[8]   # index fingertip
+            confidence = result.handedness[0][0].score
 
             x = int(landmark.x * w)
             y = int(landmark.y * h)
 
-            hand_pos = (x, y)
+            hand_data = ((x, y), confidence)
 
             cv2.circle(frame, (x, y), 8, (0, 255, 0), -1)
 
-        return frame, hand_pos
+        return frame, hand_data, landmarks_list

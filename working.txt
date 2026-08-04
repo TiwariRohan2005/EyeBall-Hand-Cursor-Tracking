@@ -1,0 +1,29 @@
+=== TrueEyeball Project Commands ===
+
+To run these commands, you must open your terminal/PowerShell inside your project folder:
+cd "c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject"
+
+--- 1. HOW TO REGISTER A NEW FACE ---
+Use this to capture your face and associate it with a name.
+Command:
+.\venv\Scripts\python.exe register.py
+
+--- 2. HOW TO MANAGE USERS ---
+Use this to see who is registered, change names, or delete a profile.
+
+List all users:
+.\venv\Scripts\python.exe manage_users.py list
+
+Rename a user:
+.\venv\Scripts\python.exe manage_users.py rename "Old_Name" "New_Name"
+
+Delete (revoke) a user:
+.\venv\Scripts\python.exe manage_users.py revoke "Name"
+
+--- 3. HOW TO RUN THE APP ---
+Use this to actually run the computer vision app. 
+(It will only start if at least one person is registered!)
+Command:
+.\venv\Scripts\python.exe main.py
+
+To close the app safely, click the camera window and press the 'Q' or 'ESC' key!
