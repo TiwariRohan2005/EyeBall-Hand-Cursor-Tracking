@@ -1,103 +1,92 @@
-# TrueEyeball OS Platform (Complete Edition)
+# TrueEyeball
 
-An AI-powered hands-free computer control system that connects eye tracking, hand tracking, gesture recognition, and biometric authentication directly onto a secure, context-aware command registry managing complex desktop application state.
+## Overview
 
----
+TrueEyeball is an AI-powered, hands-free computer control system and administrative environment. Originally conceptualized as the "Eye Ball Motion Tracking System" (a spatial cursor simulation framework), the project has evolved into a fully unified **Dual-Role Application Desktop**.
 
-## PROJECT OVERVIEW
+By aggregating real-time facial recognition, computer vision eye tracking, semantic hand gesture kinematics, and biometric session security, TrueEyeball replaces traditional mouse-and-keyboard peripherals. It natively drives a complex application ecosystem—principally a robust Smart Library Management System and a decoupled Study Notes platform—all orchestrated through intelligent context-aware physical gestures securely governed by strict Role-Based Access Control (RBAC).
 
-TrueEyeball evolved from a hardware-free spatial cursor simulation into a full Dual-Role Application Desktop. It operates an internal Database managing a secure inventory of Books, Transactions, Study Notes, and automated Excel analytical reporting, entirely navigable through secure gesture mappings mapped to active intelligent contexts (Library vs Notes).
+## Key Features
 
-## FEATURES
+- **Advanced Computer Vision Modalities**
+  - **Real-Time Eye Tracking & Blink Detection**: Parses precise facial landmarks and evaluates Eye Aspect Ratio (EAR) dynamically to map pupil coordinates.
+  - **Kinematic Cursor Control**: Smooth, responsive on-screen cursor control reinforced by Exponential Moving Average (EMA) smoothing and velocity-based mapping algorithms.
+  - **Hand Tracking & Gesture Recognition**: Detects sophisticated spatial signals (thumb up/down, swipes, pointing) coordinated through a robust gesture state machine.
+- **Biometric Security Architecture**
+  - **Face Authentication**: Mandatory encrypted biometric registration ensuring only registered faces unlock the application.
+  - **Continuous Session Verification**: Implements real-time frame-by-frame user verification that instantly halts unauthorized interactions.
+  - **Role-Based Access Control (OWNER/STAFF)**: Enforces hard ownership boundaries natively at the database level against gesture intents.
+  - **Soft-Deletion User Management**: Staff accounts can be soft-deactivated securely by the Owner without breaking referenced constraints in the historical ledger.
+- **Smart Library Management System**
+  - **Inventory Subsystem**: Full CRUD operations executed over gestural selection matrices.
+  - **Logical Book Lifecycles**: Strict issue and return operational constraints linked directly to the authenticated system operator.
+  - **Transaction Ledger**: Historical tracking preserving system accountability.
+- **Automated Reporting**
+  - **Excel Generation**: Deep integration with OpenPyXL generating and intelligently updating `TrueEyeball_Library_Report.xlsx` dashboards conditionally depending on the requesting role.
+- **Unified CustomTkinter Architecture**
+  - Multi-threaded processing distributing CV camera pipelines and queue-based UI rendering without interface starvation.
+  - Built-in comprehensive unit and integration **Testing** covering 100% of major logic paths.
 
-- **Face Authentication**: Continuous AI verification enforcing dual-roles (OWNER / STAFF).
-- **Study Notes Mode**: Personal SQLite-persisted notebooks decoupled cleanly from the Library.
-- **Library Manager**: Add, edit, remove, issue, and return books using gestural logic.
-- **AI Command Center**: Real-time explainable tracking widget embedded rendering logic chains.
-- **Automated Reporting**: Export robust `.xlsx` analytics dashboards instantly.
-- **Database Engine**: Atomic constraints, indexed SQLite relational stability.
+## System Architecture
 
-## ARCHITECTURE
+The core architecture operates serially through a robust pipeline decoupled for scale:
 
-Data flows sequentially:
-`Camera -> Gesture AI -> Identity Authentication -> Context Engine -> Intent Registry -> Central Registry -> Permission Manager (Strict Roles) -> Database Service`
-
-## REQUIREMENTS
-
-- Python 3.11
-- `face_landmarker.task` running on system.
-- Webcam (Required for Authentication entry)
-
-## INSTALLATION & VIRTUAL ENVIRONMENT
-
-Start by spawning an optimized local machine environment:
-
-```cmd
-py -3.11 -m venv venv
-venv\Scripts\activate
-pip install -r requirements.txt
-pip install mediapipe==0.10.32
+```text
+ Webcam Feed
+      ↓
+ OpenCV Engine
+      ↓
+ MediaPipe Processors (Face Mesh + Hand Tracking)
+      ↓
+ Authentication Service (Continuous Identity Guard)
+      ↓
+ Gesture & Interaction Engine (EAR, Hand Signals, Smooth Cursor)
+      ↓
+ Context Intent Analyzer (Yields Command Instructions)
+      ↓
+ Command Registry (RBAC Filter)
+      ↓
+ Smart Library / Application GUI (CustomTkinter)
+      ↓
+ SQLite Database / OpenPyXL Reporting
 ```
 
-## FIRST OWNER REGISTRATION
+## Technology Stack
 
-The system denies access initially. Capture your biological identity safely:
+The project relies strictly on a deterministic core layout without fragmented bloat:
 
-```cmd
-python register.py
+- **Python 3.11** (Core Processing Logic)
+- **OpenCV (`opencv-python`)** (Video I/O and frame transformation)
+- **MediaPipe** (High-fidelity ML landmarker topology for eyes and hands)
+- **CustomTkinter** (Modern, hardware-accelerated GUI development)
+- **SQLite** (Embedded relational database framework)
+- **OpenPyXL** (Static robust Excel `.xlsx` workbook manipulation)
+- **NumPy** (High-performance array operations and geometric mathematics)
+- **Cryptography** (Secure AES encryption mapping for biometric profiles)
+
+## Project Structure
+
+```text
+TrueEyeballproject/
+├── data/                       # Local SQLite DB and generated Excel reports
+├── library_app/                # Application GUI, backend commands, and Repository
+│   ├── commands/               # Command mappings for physical gestures
+│   ├── database/               # Relational schemas and object handlers
+│   ├── reports/                # Dynamic spreadsheet exporting logic
+│   └── ui/                     # Decoupled application-specific custom widgets
+├── modules/                    # Independent AI computer vision modules
+│   ├── auth/                   # Face landmarker authentication manager
+│   ├── context/                # Context-aware behavioral intent mapper
+│   ├── evaluation/             # Specialized model benchmarking suite
+│   └── ui/                     # Assistive interface systems (Virtual Keyboard)
+├── tests/                      # Extensive PyTest integration suite
+├── TrueEyeball_App.py          # Legacy entry wrapper
+├── core_backend.py             # Global AI configuration processing thread
+├── main.py                     # Entry point (Application Startup)
+├── manage_users.py             # Administrative fallback CLI
+├── register.py                 # Visual User Registration & Model capture
+├── run.bat                     # Windows application launcher
+├── run_tests.bat               # Headless automated testing runner
+├── seed_books.py               # Pre-population database bootstrapping script
+└── requirements.txt            # System dependencies
 ```
-
-_The very first user is permanently assigned `OWNER`._
-
-## APPLICATION STARTUP
-
-To launch the complete dual-pane system effortlessly:
-
-```cmd
-run.bat
-```
-
-Alternatively: `python main.py`
-
-## LIBRARY MANAGEMENT (OWNER/STAFF)
-
-- **Owners** have unrestricted Read, Write, Delete rights and global transaction history.
-- **Staff** have Read, Issue, and self-Return rights. Editing books or generating bulk global reports is restricted. Attempted breaches emit `ACCESS_DENIED` exceptions in the AI loop.
-
-## GESTURE CONTROLS & CONTEXT SWITCHING
-
-Actions differ logically per active system.
-
-- `BOTH THUMBS UP`: Flips active application state (`LIBRARY <-> STUDY_NOTES`).
-- **In Library:** `RIGHT_THUMB_UP` == `ISSUE BOOK`. `SWIPE_LEFT` == `PREVIOUS_BOOK`.
-- **In Study Notes:** `RIGHT_THUMB_UP` == `SAVE NOTE`.
-
-## AI COMMAND CENTER
-
-This visual side-panel monitors the AI engine in realtime showing exact pipeline states:
-
-- Authenticated ID Role
-- Raw Hand Gesture Detected
-- Context Translation Intent
-- Enforced Application command resulting
-
-## TESTING & TROUBLESHOOTING
-
-To run the master unit suite testing DB CRUD, permissions, intent logic, and command bindings:
-
-```cmd
-run_tests.bat
-```
-
-_(Runs: `python -m unittest discover tests` internally)._
-
-## SHUTDOWN
-
-Close cleanly via conventional window closing `X`. Background AI sensors tear down cleanly, releasing resources.
-
-## PROJECT STRUCTURE
-
-- `library_app/`: Application data logic, repository, and custom UI components (Dashboard).
-- `modules/`: Headless AI subsystems managing prediction, calibration, kinematics, face identity, and Contextual Intent resolution.
-- `data/`: Storage path for Local SQLite persistence and reports.
-- `tests/`: End-to-end integration mapping layers.
