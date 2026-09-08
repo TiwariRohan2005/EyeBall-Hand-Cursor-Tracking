@@ -90,3 +90,88 @@ TrueEyeballproject/
 ├── seed_books.py               # Pre-population database bootstrapping script
 └── requirements.txt            # System dependencies
 ```
+<<<<<<< HEAD
+=======
+
+---
+
+# User Registration
+
+Register a new user before using the application.
+
+```bash
+python register.py
+```
+
+---
+
+# User Management
+
+### List Registered Users
+
+```bash
+python manage_users.py list
+```
+
+### Rename User
+
+```bash
+python manage_users.py rename "Old_Name" "New_Name"
+```
+
+### Revoke User
+
+```bash
+python manage_users.py revoke "User_Name"
+```
+
+---
+
+# Project Workflow
+
+1. Register a new face using `register.py`.
+2. Manage registered users with `manage_users.py`.
+3. Launch the application using `main.py`.
+4. Authentication is performed automatically.
+5. Cursor control begins after successful verification.
+6. Continuous verification ensures only authorized users retain access.
+
+---
+
+# Controls
+
+| Action           | Control               |
+| ---------------- | --------------------- |
+| Cursor Movement  | Hand Movement         |
+| Left Click       | Left Eye Blink        |
+| Right Click      | Right Eye Blink       |
+| Pause Cursor     | Both Eyes Closed      |
+| Exit Application | Press**Q** or **ESC** |
+
+---
+
+# Security Features
+
+- Secure biometric enrollment
+- Authorized-user-only access
+- Continuous identity verification
+- Session management
+- User registration and revocation
+- Activity logging
+
+---
+
+# Future Enhancements
+
+- Multi-user Profiles
+- Head Pose Tracking
+- Custom Gesture Training
+- AI-based Personalization
+- Real-World Program Integration
+
+---
+
+# License
+
+This project is intended for educational and research purpose
+>>>>>>> 83fcd364b55af3c6fa1f7ebc352a9d39aba9c301
