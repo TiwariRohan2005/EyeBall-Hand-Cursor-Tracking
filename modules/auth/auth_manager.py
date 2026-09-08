@@ -29,12 +29,12 @@ class AuthManager:
             self.fail_frames += 1
             if self.state == "AUTHENTICATED" and self.fail_frames > self.max_fail_frames:
                 self.lock_session("Face disappeared")
-            return self.state, self.last_confidence
+            return self.state, self.current_user, self.last_confidence
             
         self.fail_frames = 0
         emb = self.recognizer.extract_embedding(face_landmarks)
         if not emb:
-            return self.state, self.last_confidence
+            return self.state, self.current_user, self.last_confidence
 
         if self.state == "ENROLLING":
             self.enrollment_samples.append(emb)
@@ -89,7 +89,7 @@ class AuthManager:
              else:
                  self.last_confidence = best_score
 
-        return self.state, self.last_confidence
+        return self.state, self.current_user, self.last_confidence
 
     def start_session(self, user_id):
         self.current_user = user_id

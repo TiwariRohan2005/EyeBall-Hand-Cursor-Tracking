@@ -1,0 +1,1 @@
+{"baseline_left_ear": 0.2863565023283131, "baseline_right_ear": 0.297134826102833, "avg_lighting": 103.46930588107641, "adaptive_config": {"blink_threshold_ratio": 0.65, "min_blink_time": 0.15, "max_blink_time": 0.8, "cursor_base_alpha": 0.2, "cursor_deadzone": 2.0, "gesture_cooldown": 0.5, "stability_radius": 25.0, "hover_time_required": 0.8}}

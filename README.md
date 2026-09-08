@@ -1,189 +1,103 @@
-# TrueEyeball Project
+# TrueEyeball OS Platform (Complete Edition)
 
-An AI-powered hands-free computer control system that combines eye tracking, hand tracking, gesture recognition, and biometric authentication for secure and intelligent human-computer interaction.
-
----
-
-# Features
-
-- 👁️ Eye tracking for click detection
-- ✋ Hand tracking for cursor movement
-- 🖱️ Left eye blink → Left Click
-- 🖱️ Right eye blink → Right Click
-- ⏸️ Both eyes closed → Pause Cursor
-- 🔐 Face Recognition Authentication
-- 👤 Face Enrollment System
-- 🔄 Continuous User Verification
-- 📋 User Management Utility
-- 📊 Session Logging
+An AI-powered hands-free computer control system that connects eye tracking, hand tracking, gesture recognition, and biometric authentication directly onto a secure, context-aware command registry managing complex desktop application state.
 
 ---
 
-# Project Roadmap
+## PROJECT OVERVIEW
 
-## ✅ Phase 1 — AI Processing Layer
+TrueEyeball evolved from a hardware-free spatial cursor simulation into a full Dual-Role Application Desktop. It operates an internal Database managing a secure inventory of Books, Transactions, Study Notes, and automated Excel analytical reporting, entirely navigable through secure gesture mappings mapped to active intelligent contexts (Library vs Notes).
 
-- Cursor Intelligence
-- EMA Cursor Smoothing
-- Velocity Mapping
+## FEATURES
 
-**Status:** Completed
+- **Face Authentication**: Continuous AI verification enforcing dual-roles (OWNER / STAFF).
+- **Study Notes Mode**: Personal SQLite-persisted notebooks decoupled cleanly from the Library.
+- **Library Manager**: Add, edit, remove, issue, and return books using gestural logic.
+- **AI Command Center**: Real-time explainable tracking widget embedded rendering logic chains.
+- **Automated Reporting**: Export robust `.xlsx` analytics dashboards instantly.
+- **Database Engine**: Atomic constraints, indexed SQLite relational stability.
 
----
+## ARCHITECTURE
 
-## ✅ Phase 2 — Adaptive Blink Intelligence
+Data flows sequentially:
+`Camera -> Gesture AI -> Identity Authentication -> Context Engine -> Intent Registry -> Central Registry -> Permission Manager (Strict Roles) -> Database Service`
 
-- Dynamic Blink Threshold
-- Blink Confidence Scoring
-- Blink Debounce
-- Automatic Calibration
-
-**Status:** Completed
-
----
-
-## ✅ Phase 3 — Gesture Recognition Engine
-
-- Gesture Recognition
-- Gesture Confidence Scoring
-- Gesture Stabilization
-- Gesture State Machine
-
-**Status:** Completed
-
----
-
-## ✅ Phase 4 — Secure Authentication
-
-- Face Enrollment
-- Face Recognition
-- Continuous Verification
-- Session Management
-- Activity Logging
-
-**Status:** Completed
-
----
-
-# Tech Stack
+## REQUIREMENTS
 
 - Python 3.11
-- OpenCV
-- MediaPipe
-- NumPy
-- PyAutoGUI
-- Face Recognition
-- Machine Learning
+- `face_landmarker.task` running on system.
+- Webcam (Required for Authentication entry)
 
----
+## INSTALLATION & VIRTUAL ENVIRONMENT
 
-# Requirements
+Start by spawning an optimized local machine environment:
 
-- Python 3.11
-- `face_landmarker.task` in the project root
-
----
-
-# Installation
-
-```bash
+```cmd
 py -3.11 -m venv venv
-
 venv\Scripts\activate
-
 pip install -r requirements.txt
-
 pip install mediapipe==0.10.32
 ```
 
----
+## FIRST OWNER REGISTRATION
 
-# Running the Application
+The system denies access initially. Capture your biological identity safely:
 
-```bash
-python main.py
-```
-
----
-
-# User Registration
-
-Register a new user before using the application.
-
-```bash
+```cmd
 python register.py
 ```
 
----
+_The very first user is permanently assigned `OWNER`._
 
-# User Management
+## APPLICATION STARTUP
 
-### List Registered Users
+To launch the complete dual-pane system effortlessly:
 
-```bash
-python manage_users.py list
+```cmd
+run.bat
 ```
 
-### Rename User
+Alternatively: `python main.py`
 
-```bash
-python manage_users.py rename "Old_Name" "New_Name"
+## LIBRARY MANAGEMENT (OWNER/STAFF)
+
+- **Owners** have unrestricted Read, Write, Delete rights and global transaction history.
+- **Staff** have Read, Issue, and self-Return rights. Editing books or generating bulk global reports is restricted. Attempted breaches emit `ACCESS_DENIED` exceptions in the AI loop.
+
+## GESTURE CONTROLS & CONTEXT SWITCHING
+
+Actions differ logically per active system.
+
+- `BOTH THUMBS UP`: Flips active application state (`LIBRARY <-> STUDY_NOTES`).
+- **In Library:** `RIGHT_THUMB_UP` == `ISSUE BOOK`. `SWIPE_LEFT` == `PREVIOUS_BOOK`.
+- **In Study Notes:** `RIGHT_THUMB_UP` == `SAVE NOTE`.
+
+## AI COMMAND CENTER
+
+This visual side-panel monitors the AI engine in realtime showing exact pipeline states:
+
+- Authenticated ID Role
+- Raw Hand Gesture Detected
+- Context Translation Intent
+- Enforced Application command resulting
+
+## TESTING & TROUBLESHOOTING
+
+To run the master unit suite testing DB CRUD, permissions, intent logic, and command bindings:
+
+```cmd
+run_tests.bat
 ```
 
-### Revoke User
+_(Runs: `python -m unittest discover tests` internally)._
 
-```bash
-python manage_users.py revoke "User_Name"
-```
+## SHUTDOWN
 
----
+Close cleanly via conventional window closing `X`. Background AI sensors tear down cleanly, releasing resources.
 
-# Project Workflow
+## PROJECT STRUCTURE
 
-1. Register a new face using `register.py`.
-2. Manage registered users with `manage_users.py`.
-3. Launch the application using `main.py`.
-4. Authentication is performed automatically.
-5. Cursor control begins after successful verification.
-6. Continuous verification ensures only authorized users retain access.
-
----
-
-# Controls
-
-| Action           | Control               |
-| ---------------- | --------------------- |
-| Cursor Movement  | Hand Movement         |
-| Left Click       | Left Eye Blink        |
-| Right Click      | Right Eye Blink       |
-| Pause Cursor     | Both Eyes Closed      |
-| Exit Application | Press**Q** or **ESC** |
-
----
-
-# Security Features
-
-- Secure biometric enrollment
-- Authorized-user-only access
-- Continuous identity verification
-- Session management
-- User registration and revocation
-- Activity logging
-
----
-
-# Future Enhancements
-
-- Voice Commands
-- Multi-user Profiles
-- Head Pose Tracking
-- Custom Gesture Training
-- AI-based Personalization
-- Desktop Installer
-- Cross-platform Support
-
----
-
-# License
-
-This project is intended for educational and research purpose
+- `library_app/`: Application data logic, repository, and custom UI components (Dashboard).
+- `modules/`: Headless AI subsystems managing prediction, calibration, kinematics, face identity, and Contextual Intent resolution.
+- `data/`: Storage path for Local SQLite persistence and reports.
+- `tests/`: End-to-end integration mapping layers.

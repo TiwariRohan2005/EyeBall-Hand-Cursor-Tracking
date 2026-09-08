@@ -1,29 +1,101 @@
+# TrueEyeball Project - Comprehensive Technical Overview
+
+This document provides a holistic, detailed technical explanation of the **TrueEyeball** project. It is designed to be pasted as-is to another AI to instantly provide full architectural and functional context of this repository.
+
+## 1. High-Level Architecture Overview
+TrueEyeball is an AI-powered, hands-free computer control system. It combines **Eye Tracking**, **Hand Tracking**, **Gesture Recognition**, and **Biometric (Face) Authentication** into a unified interaction pipeline. It is built natively in Python utilizing OpenCV, MediaPipe for perception, and CustomTkinter for GUI generation.
+
+The project operates in two primary execution contexts:
+1. **TrueEyeball Dashboard (`TrueEyeball_App.py`)**: The main OS-level application that acts as a hands-free mouse controller and biometric lock.
+2. **Library Application (`library_app/app.py`)**: A decoupled, domain-specific AI application that leverages TrueEyeball's authentication and gesture engine for managing a virtual library.
+
+---
+
+## 2. Core Components and Data Flow
+
+### A. The Perception Layer (`modules/`)
+This is the foundational layer responsible for extracting biometric and skeletal data from the camera feed via MediaPipe.
+
+- **`eye_tracker.py`**: Monitors eye state (open/closed) using facial landmarks. Implements dynamic blink thresholds, debouncing, and blink confidence scoring. Responsible for generating Left Click (Left Blink) and Right Click (Right Blink).
+- **`hand_tracker.py`**: Extracts 3D hand landmarks using MediaPipe Hand Landmarker. Extracts palm coordinates and joint angles.
+- **`gesture_engine.py`**: Evaluates the hand landmarks to infer gestures using a stabilized Gesture State Machine. Includes actions like Index Point, Swipe Left/Right, Thumbs Up/Down.
+
+### B. Security & Authentication (`modules/auth/`)
+TrueEyeball is secure-by-default, meaning the interaction pipeline pauses unless an enrolled face is actively detected.
+- **`auth_manager.py`**: Handles face enrollment, 1:N face verification against local embeddings, and continuous session locking. Unlocks the system when an allowed user is recognized.
+
+### C. Logic & Stabilization Engine
+- **`ai_processor.py` (CursorStabilizer)**: Uses Exponential Moving Average (EMA) and dynamic velocity mapping to filter out hand jitter and provide smooth OS cursor coordinates.
+- **`calibration/`**: Provides adaptive learning engines to tailor kinematic boundaries and gesture sensitivities per individual user profile.
+
+### D. The Backend Processing Loop (`core_backend.py`)
+This script executes the main asynchronous `while` loop that pulls frames from OpenCV, feeds them through the Perception Layer, handles Authentication state, and finally dispatches normalized inputs to the OS controls (`mouse_actions.py`). It passes data back to the GUI thread via a concurrent `queue.Queue`.
+
+---
+
+## 3. Application Interfaces
+
+### Main Dashboard (`TrueEyeball_App.py`)
+A modern, dark-themed CustomTkinter desktop overlay interface. It hosts:
+- A Sidebar for Navigation (Settings, Analytics, Calibration Wizard).
+- A primary Canvas showing the processed Video Feed.
+- Real-time HUD elements detailing Engine Latency (FPS), Auth Status, and Context Mode.
+
+### The Library App (`library_app/app.py` & `library_app/models.py`)
+A sub-project demonstrating application-specific use of the TrueEyeball library.
+- Operates a specialized UI showing a carousel of Books.
+- Reuses the `EyeTracker` and `AuthManager` to ensure secure access.
+- Uses `LibraryGestureEngine` (`library_app/gestures.py`) to map gestures to internal actions:
+  - `SWIPE_LEFT` / `SWIPE_RIGHT`: Navigate books
+  - `RIGHT_THUMB_UP`: Issue Book
+  - `RIGHT_THUMB_DOWN`: Return Book
+  - `BOTH_THUMBS_UP`: Trigger Analytical Reporting Dashboard (`library_app/report_ui.py`)
+
+---
+
+## 4. Key Execution Instructions
+- **Activate Env**: `.\venv\Scripts\Activate.ps1`
+- **Main App**: `python TrueEyeball_App.py`
+- **Library Demo**: `python library_app/app.py`
+- **User Registration CLI**: `python manage_users.py list`
+
+## Summary for AI Assistants
+When reasoning across this codebase, note the strong separation of concerns:
+1. `modules/` is strictly for mathematical inference, landmarking, array processing, and ML abstraction.
+2. `core_backend.py` wires the logic in an async loop and uses threading queues for IPC.
+3. The GUI layer (`TrueEyeball_App.py`, `library_app/`) consumes processed events from the backend to update CustomTkinter widgets visually without blocking the frame rendering pipeline.
+
+<!--
 === TrueEyeball Project Commands ===
 
-To run these commands, you must open your terminal/PowerShell inside your project folder:
+The AI project has officially matured into a standalone Desktop Application! 
+You no longer need to run multiple scripts. It has all been unified into a single Dashboard overlay natively supporting GUI interactions.
+
+To run the application, open your terminal/PowerShell inside your project folder:
 cd "c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject"
 
---- 1. HOW TO REGISTER A NEW FACE ---
-Use this to capture your face and associate it with a name.
+--- 1. HOW TO RUN THE APP ---
+Everything happens here now. It will open the modern CustomTkinter Application Interface!
 Command:
-.\venv\Scripts\python.exe register.py
+.\venv\Scripts\python.exe TrueEyeball_App.py
 
---- 2. HOW TO MANAGE USERS ---
-Use this to see who is registered, change names, or delete a profile.
+From inside the App you can:
+- Run the "Calibration Wizard" from the Sidebar to enroll your face graphically!
+- View Real-Time Latency Statistics
+- Toggle UI Settings visually (Light / Dark)
 
-List all users:
+--- [LEGACY / DEBUG SCRIPTS] ---
+If you still wish to test specific backend components cleanly:
+
+Manage Users CLI:
 .\venv\Scripts\python.exe manage_users.py list
 
-Rename a user:
-.\venv\Scripts\python.exe manage_users.py rename "Old_Name" "New_Name"
+Keyboard Logic Sandbox:
+.\venv\Scripts\python.exe test_keyboard.py
 
-Delete (revoke) a user:
-.\venv\Scripts\python.exe manage_users.py revoke "Name"
+N-Gram Machine Learning Text Predictions Sandbox:
+.\venv\Scripts\python.exe test_prediction.py
 
---- 3. HOW TO RUN THE APP ---
-Use this to actually run the computer vision app. 
-(It will only start if at least one person is registered!)
-Command:
-.\venv\Scripts\python.exe main.py
-
-To close the app safely, click the camera window and press the 'Q' or 'ESC' key!
+py
+.\venv\Scripts\Activate.ps1; python library_app/app.
+-->

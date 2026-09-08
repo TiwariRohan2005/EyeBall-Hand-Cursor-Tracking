@@ -1,0 +1,190 @@
+{
+    "session_duration": 123.25928688049316,
+    "swipe_count": 43,
+    "issued_count": 5,
+    "returned_count": 4,
+    "books": [
+        {
+            "title": "Book A",
+            "status": "Available",
+            "issue_timestamp": null,
+            "return_timestamp": null,
+            "session_history": 0
+        },
+        {
+            "title": "Book B",
+            "status": "Available",
+            "issue_timestamp": null,
+            "return_timestamp": null,
+            "session_history": 0
+        },
+        {
+            "title": "Book C",
+            "status": "Available",
+            "issue_timestamp": null,
+            "return_timestamp": null,
+            "session_history": 0
+        },
+        {
+            "title": "Book D",
+            "status": "Available",
+            "issue_timestamp": null,
+            "return_timestamp": null,
+            "session_history": 0
+        },
+        {
+            "title": "Book E",
+            "status": "Available",
+            "issue_timestamp": null,
+            "return_timestamp": null,
+            "session_history": 0
+        },
+        {
+            "title": "Book F",
+            "status": "Available",
+            "issue_timestamp": null,
+            "return_timestamp": null,
+            "session_history": 0
+        },
+        {
+            "title": "Book G",
+            "status": "Available",
+            "issue_timestamp": null,
+            "return_timestamp": null,
+            "session_history": 0
+        },
+        {
+            "title": "Book H",
+            "status": "Available",
+            "issue_timestamp": null,
+            "return_timestamp": null,
+            "session_history": 0
+        },
+        {
+            "title": "Book I",
+            "status": "Available",
+            "issue_timestamp": null,
+            "return_timestamp": null,
+            "session_history": 0
+        },
+        {
+            "title": "Book J",
+            "status": "Available",
+            "issue_timestamp": null,
+            "return_timestamp": null,
+            "session_history": 0
+        },
+        {
+            "title": "Book K",
+            "status": "Available",
+            "issue_timestamp": null,
+            "return_timestamp": null,
+            "session_history": 0
+        },
+        {
+            "title": "Book L",
+            "status": "Available",
+            "issue_timestamp": null,
+            "return_timestamp": null,
+            "session_history": 0
+        },
+        {
+            "title": "Book M",
+            "status": "Available",
+            "issue_timestamp": null,
+            "return_timestamp": null,
+            "session_history": 0
+        },
+        {
+            "title": "Book N",
+            "status": "Available",
+            "issue_timestamp": null,
+            "return_timestamp": null,
+            "session_history": 0
+        },
+        {
+            "title": "Book O",
+            "status": "Available",
+            "issue_timestamp": null,
+            "return_timestamp": null,
+            "session_history": 0
+        },
+        {
+            "title": "Book P",
+            "status": "Available",
+            "issue_timestamp": null,
+            "return_timestamp": null,
+            "session_history": 0
+        },
+        {
+            "title": "Book Q",
+            "status": "Available",
+            "issue_timestamp": null,
+            "return_timestamp": null,
+            "session_history": 0
+        },
+        {
+            "title": "Book R",
+            "status": "Available",
+            "issue_timestamp": null,
+            "return_timestamp": null,
+            "session_history": 0
+        },
+        {
+            "title": "Book S",
+            "status": "Available",
+            "issue_timestamp": null,
+            "return_timestamp": null,
+            "session_history": 0
+        },
+        {
+            "title": "Book T",
+            "status": "Available",
+            "issue_timestamp": null,
+            "return_timestamp": null,
+            "session_history": 0
+        },
+        {
+            "title": "Book U",
+            "status": "Available",
+            "issue_timestamp": null,
+            "return_timestamp": null,
+            "session_history": 0
+        },
+        {
+            "title": "Book V",
+            "status": "Issued",
+            "issue_timestamp": 1786603331.1755917,
+            "return_timestamp": 1786603329.9902155,
+            "session_history": 2
+        },
+        {
+            "title": "Book W",
+            "status": "Available",
+            "issue_timestamp": null,
+            "return_timestamp": null,
+            "session_history": 0
+        },
+        {
+            "title": "Book X",
+            "status": "Available",
+            "issue_timestamp": 1786603315.0492449,
+            "return_timestamp": 1786603343.6092079,
+            "session_history": 1
+        },
+        {
+            "title": "Book Y",
+            "status": "Available",
+            "issue_timestamp": 1786603307.7292168,
+            "return_timestamp": 1786603309.7974074,
+            "session_history": 1
+        },
+        {
+            "title": "Book Z",
+            "status": "Available",
+            "issue_timestamp": 1786603399.9081388,
+            "return_timestamp": 1786603402.762957,
+            "session_history": 1
+        }
+    ]
+}

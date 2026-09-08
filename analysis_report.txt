@@ -1,0 +1,267 @@
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\core_backend.py
+----------------------------------------
+Function: start_ai_loop
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\generate_analysis.py
+----------------------------------------
+Function: analyze_file
+Function: main
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\main.py
+----------------------------------------
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\manage_users.py
+----------------------------------------
+Function: print_help
+Function: main
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\register.py
+----------------------------------------
+Function: main
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\test_keyboard.py
+----------------------------------------
+Function: main
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\test_prediction.py
+----------------------------------------
+Function: main
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\TrueEyeball_App.py
+----------------------------------------
+Class: TrueEyeballDashboard
+  Method: __init__
+  Method: _build_ui
+  Method: change_appearance
+  Method: open_wizard
+  Method: _start_backend
+  Method: _update_video
+  Method: on_closing
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\modules\ai_processor.py
+----------------------------------------
+Class: CursorStabilizer
+  Method: __init__
+  Method: process
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\modules\eye_tracker.py
+----------------------------------------
+Class: EyeTracker
+  Method: __init__
+  Method: eye_ratio
+  Method: process
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\modules\gesture_engine.py
+----------------------------------------
+Class: GestureEngine
+  Method: __init__
+  Method: _dist
+  Method: get_finger_states
+  Method: recognize
+  Method: process
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\modules\hand_tracker.py
+----------------------------------------
+Class: HandTracker
+  Method: __init__
+  Method: process
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\modules\mouse_actions.py
+----------------------------------------
+Class: MouseController
+  Method: __init__
+  Method: handle
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\modules\auth\auth_manager.py
+----------------------------------------
+Class: AuthManager
+  Method: __init__
+  Method: process_face
+  Method: start_session
+  Method: lock_session
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\modules\auth\face_recognizer.py
+----------------------------------------
+Class: FaceRecognizer
+  Method: __init__
+  Method: _dist
+  Method: extract_embedding
+  Method: compare
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\modules\auth\logger.py
+----------------------------------------
+Class: AuthLogger
+  Method: __init__
+  Method: login
+  Method: logout
+  Method: failed_auth
+  Method: unauthorized_attempt
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\modules\auth\storage.py
+----------------------------------------
+Class: UserStorage
+  Method: __init__
+  Method: _read_raw
+  Method: _write_raw
+  Method: get_all_users
+  Method: add_user
+  Method: delete_user
+  Method: rename_user
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\modules\auth\__init__.py
+----------------------------------------
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\modules\calibration\adaptive_learning.py
+----------------------------------------
+Class: AdaptiveLearningEngine [Doc: Operates during main.py (Runtime). Reads the personalized profile, injects 
+custom mathematical tole...]
+  Method: __init__
+  Method: _load
+  Method: save
+  Method: get_baseline_ears [Doc: Yields dynamically discovered EAR bases, or safe defaults if none exist (legacy user)....]
+  Method: adapt_stability [Doc: Called when a Hover triggers but is violently cancelled instantly (Misfire).
+Uses EMA to incremental...]
+  Method: adapt_blink_timing [Doc: Stretches the max blink time slightly if the user is keeping their eyes closed longer
+than the hardc...]
+  Method: get_config
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\modules\calibration\calibration_engine.py
+----------------------------------------
+Class: CalibrationEngine
+  Method: __init__
+  Method: process_frame [Doc: Called 30 times during user registration to extract baseline physical variables....]
+  Method: finalize_calibration [Doc: Finishes calibration and exports normalized tuning limits.
+Discards outliers (accidental blinks) to ...]
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\modules\calibration\config_manager.py
+----------------------------------------
+Class: AdaptiveConfig [Doc: Central fallback configuration serving as a safe fail-state if adaptive 
+learning modules are absent...]
+  Method: __init__
+  Method: to_dict
+  Method: from_dict
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\modules\calibration\__init__.py
+----------------------------------------
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\modules\context\context_analyzer.py
+----------------------------------------
+Class: ContextAnalyzer [Doc: Background non-blocking service tracking the exact Windows application 
+in the foreground. Eliminate...]
+  Method: __init__
+  Method: _get_active_process_name
+  Method: update [Doc: Polls the OS periodically. Returns True if the context has significantly shifted....]
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\modules\context\intent_engine.py
+----------------------------------------
+Class: IntentEngine [Doc: Acts as the translation gateway. It absorbs a raw physical gesture (e.g. 'PINCH')
+and matches it aga...]
+  Method: __init__
+  Method: reload
+  Method: evaluate [Doc: Translates physical gesture to contextual smart Intent.
+Falls back to General Desktop rules if the a...]
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\modules\context\__init__.py
+----------------------------------------
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\modules\evaluation\benchmark_report.py
+----------------------------------------
+Class: BenchmarkReportGenerator [Doc: Synchronously crunches the millions of mathematical datapoints captured 
+by the EvaluationManager Qu...]
+  Method: __init__
+  Method: export_all
+  Method: _export_json
+  Method: _export_csvs
+  Method: _generate_graphs [Doc: Gracefully leverages matplotlib if available locally to build historic diagrams....]
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\modules\evaluation\eval_manager.py
+----------------------------------------
+Class: EvaluationManager [Doc: Central Asynchronous Singleton for recording AI framework telemetry limits.
+All modules push metrics...]
+  Method: __new__
+  Method: _init_engine
+  Method: log_metric [Doc: Thread-safe, non-blocking telemetry injection API. 
+Category must belong to standard domains (e.g., ...]
+  Method: _process_queue
+  Method: shutdown_and_export [Doc: Gracefully terminate the async observer and flush mathematical metric averages 
+to local JSON/CSV/Gr...]
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\modules\evaluation\__init__.py
+----------------------------------------
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\modules\prediction\dictionary_manager.py
+----------------------------------------
+Class: DictionaryManager
+  Method: __init__
+  Method: load_user_dict
+  Method: save_user_dict
+  Method: register_word [Doc: Update local user dictionary frequencies and recent timestamps....]
+  Method: levenshtein_distance
+  Method: fuzzy_search [Doc: Searches base + user dictionary for words starting with or closely matching `prefix`.
+Ranks by Edit ...]
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\modules\prediction\ngram_engine.py
+----------------------------------------
+Class: NgramPredictionEngine
+  Method: __init__
+  Method: suggest_completions [Doc: Implementation of the interface using Dictionary Manager's fuzzy matching....]
+  Method: predict_next_words [Doc: Uses N-Grams (Stupid Backoff Algorithm simplified) for next-word prediction....]
+  Method: learn_sentence [Doc: Updates Unigram frequencies in DictionaryManager and 
+Bigram/Trigram models locally....]
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\modules\prediction\__init__.py
+----------------------------------------
+Class: BasePredictionEngine [Doc: Abstract interface for prediction engines.
+Ensures future Transformer/LLM models can be swapped effo...]
+  Method: predict_next_words [Doc: Given previous context, predict highly likely next words with confidence....]
+  Method: suggest_completions [Doc: Given a partial or mistyped word, suggest completions with confidence....]
+  Method: learn_sentence [Doc: Consume a typed sentence to update local user vocabulary and weights....]
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\modules\ui\calibration_wizard.py
+----------------------------------------
+Class: CalibrationWizard [Doc: Modern Wizard overlay replacing the terminal-based 'register.py'.
+Guides the user visually through R...]
+  Method: __init__
+  Method: _build_ui
+  Method: _clear_widgets
+  Method: update_step
+  Method: _build_step_content
+  Method: prev_step
+  Method: next_step
+  Method: _trigger_backend_calibration
+  Method: _finish
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\modules\ui\interaction_engine.py
+----------------------------------------
+Class: InteractionEngine
+  Method: __init__
+  Method: _dist
+  Method: process [Doc: Process the raw cursor position through the intelligence engine.
+Modifies keyboard key states dynami...]
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\modules\ui\keyboard_manager.py
+----------------------------------------
+Class: VirtualKeyboardManager
+  Method: __init__
+  Method: _build_layout [Doc: Builds a modern QWERTY layout assigning spatial logic and unique IDs....]
+  Method: calculate_bounds [Doc: Dynamically calculates the pixel (x,y,w,h) values for every key so that 
+the keyboard naturally scal...]
+  Method: render [Doc: Renders the entire keyboard onto the provided OpenCV frame....]
+  Method: handle_hover [Doc: Gesture Engine API: Call with real-time hand/mouse coordinates.
+Sets the intersecting key to 'hover'...]
+  Method: confirm_selection [Doc: Eye Tracker API: Call when blink trigger is detected.
+Locks the target key into 'selected' momentari...]
+  Method: highlight_predictions [Doc: Prediction Engine API: Feeds a list of likely next characters....]
+  Method: set_global_state [Doc: Auth Engine API: Locks out the keyboard if Authentication drops....]
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\modules\ui\keys.py
+----------------------------------------
+Class: Key
+  Method: __init__
+  Method: update_state
+  Method: check_hit [Doc: Returns True if the (px, py) coordinate is inside this key....]
+  Method: draw
+
+File: c:\Users\tiwar\Desktop\Projects Github\TrueEyeballproject\modules\ui\__init__.py
+----------------------------------------
+

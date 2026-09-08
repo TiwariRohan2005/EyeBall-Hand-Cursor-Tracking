@@ -7,9 +7,9 @@ class MouseController:
         pyautogui.PAUSE = 0  # Disable pyautogui's built-in pause for smoother streaming
         self.screen_w, self.screen_h = pyautogui.size()
 
-    def handle(self, status, smoothed_pos, frame_shape):
+    def handle(self, intent, smoothed_pos, frame_shape):
 
-        if status == "PAUSE":
+        if intent == "PAUSE" or intent == "NONE":
             return
 
         if smoothed_pos:
@@ -22,16 +22,29 @@ class MouseController:
 
             pyautogui.moveTo(screen_x, screen_y)
 
-        if status == "LEFT_CLICK":
+        if intent == "LEFT_CLICK":
             pyautogui.click()
-
-        elif status == "RIGHT_CLICK":
+        elif intent == "RIGHT_CLICK":
             pyautogui.rightClick()
             
-        elif status == "SCROLL_MODE":
-            # For now, let's just trigger a small static scroll down as a proof of concept
-            pyautogui.scroll(-200)
+        elif intent in ["SCROLL_MODE", "WEB_SCROLL_VERTICALLY", "CODE_SCROLL"]:
+            pyautogui.scroll(-400)
             
-        elif status == "VIRTUAL_KEYBOARD":
-            # Placeholder for virtual keyboard
+        elif intent == "VOLUME_UP":
+            pyautogui.press("volumeup")
+            
+        elif intent == "VOLUME_DOWN":
+            pyautogui.press("volumedown")
+            
+        elif intent == "PLAY_PAUSE":
+            pyautogui.press("playpause")
+            
+        elif intent == "NEXT_TRACK":
+            pyautogui.press("nexttrack")
+            
+        elif intent == "GO_BACK":
+            pyautogui.press("browserback")
+            
+        elif intent == "VIRTUAL_KEYBOARD":
+            # Placeholder for virtual keyboard UI trigger
             pass

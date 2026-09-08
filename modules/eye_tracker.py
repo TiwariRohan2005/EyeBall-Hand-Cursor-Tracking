@@ -5,7 +5,7 @@ from mediapipe.tasks.python import BaseOptions
 import mediapipe as mp
 
 class EyeTracker:
-    def __init__(self):
+    def __init__(self, adaptive_engine=None):
         self.last_action = 0
 
         self.face_mesh = mp.tasks.vision.FaceLandmarker.create_from_options(
@@ -17,26 +17,11 @@ class EyeTracker:
             )
         )
         
-        self.calibrating = True
-        self.calibration_frames = 30
-        self.frame_count = 0
-        self.left_ears = []
-        self.right_ears = []
-        
-        self.baseline_left = 0
-        self.baseline_right = 0
+        self.adaptive_engine = adaptive_engine
         
         self.left_closed_start = 0
         self.right_closed_start = 0
         self.both_closed_start = 0
-        
-        # Adaptive threshold: 65% of baseline EAR
-        self.closure_threshold_ratio = 0.65
-        
-        # Temporal settings
-        self.min_blink_time = 0.15
-        self.max_blink_time = 0.8
-        self.pause_time = 1.0
 
     def eye_ratio(self, top, bottom, left, right):
         vertical = math.dist(top, bottom)
@@ -60,29 +45,19 @@ class EyeTracker:
             left_ratio = self.eye_ratio(pts[159], pts[145], pts[33], pts[133])
             right_ratio = self.eye_ratio(pts[386], pts[374], pts[362], pts[263])
             
-            if self.calibrating:
-                self.left_ears.append(left_ratio)
-                self.right_ears.append(right_ratio)
-                self.frame_count += 1
-                
-                status = f"CALIBRATING ({self.frame_count}/{self.calibration_frames})"
-                
-                if self.frame_count >= self.calibration_frames:
-                    # Use 80th percentile to discard accidental blinks during calibration
-                    sorted_left = sorted(self.left_ears)
-                    sorted_right = sorted(self.right_ears)
-                    idx = int(self.calibration_frames * 0.8)
-                    
-                    self.baseline_left = sorted_left[idx]
-                    self.baseline_right = sorted_right[idx]
-                    self.calibrating = False
-                    
-                return frame, status, face_landmarks_out
+            # Load adaptive baselines and limits dynamically
+            from modules.calibration.config_manager import AdaptiveConfig
+            if self.adaptive_engine:
+                baseline_left, baseline_right = self.adaptive_engine.get_baseline_ears()
+                config = self.adaptive_engine.get_config()
+            else:
+                baseline_left, baseline_right = 0.28, 0.28  # Safe universal defaults
+                config = AdaptiveConfig()
 
             now = time.time()
             
-            left_closed = left_ratio < (self.baseline_left * self.closure_threshold_ratio)
-            right_closed = right_ratio < (self.baseline_right * self.closure_threshold_ratio)
+            left_closed = left_ratio < (baseline_left * config.blink_threshold_ratio)
+            right_closed = right_ratio < (baseline_right * config.blink_threshold_ratio)
             
             # State tracking
             if left_closed and not right_closed:
@@ -103,19 +78,22 @@ class EyeTracker:
                 self.left_closed_start = 0
                 self.right_closed_start = 0
                 
-                if now - self.both_closed_start > self.pause_time:
+                if now - self.both_closed_start > 1.0: # Pause threshold
                     status = "PAUSE"
             else:
                 # Eyes are open. Process triggers if recently closed appropriately.
                 if self.left_closed_start > 0:
                     duration = now - self.left_closed_start
-                    if self.min_blink_time < duration < self.max_blink_time and now - self.last_action > 1:
+                    if config.min_blink_time < duration < config.max_blink_time and now - self.last_action > 1:
                         status = "LEFT_CLICK"
                         self.last_action = now
+                        if self.adaptive_engine: self.adaptive_engine.adapt_blink_timing(felt_fatigued=False)
+                    elif duration >= config.max_blink_time:    
+                        if self.adaptive_engine: self.adaptive_engine.adapt_blink_timing(felt_fatigued=True)
                         
                 if self.right_closed_start > 0:
                     duration = now - self.right_closed_start
-                    if self.min_blink_time < duration < self.max_blink_time and now - self.last_action > 1:
+                    if config.min_blink_time < duration < config.max_blink_time and now - self.last_action > 1:
                         status = "RIGHT_CLICK"
                         self.last_action = now
 
@@ -124,7 +102,6 @@ class EyeTracker:
                 self.both_closed_start = 0
 
         else:
-            if self.calibrating:
-                status = "CALIBRATING (No face detected)"
+            status = "No face detected"
 
         return frame, status, face_landmarks_out

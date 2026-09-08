@@ -2,17 +2,14 @@ import time
 import math
 
 class CursorStabilizer:
-    def __init__(self):
-        # EMA parameters
-        self.base_alpha = 0.2  # Smoothing factor
+    def __init__(self, adaptive_engine=None):
+        self.adaptive_engine = adaptive_engine
+        
         self.prev_x = 0
         self.prev_y = 0
         
         # Velocity tracking
         self.last_time = time.time()
-        
-        # Jitter filtering deadzone (in pixels)
-        self.deadzone = 2.0
         
         # High-confidence threshold
         self.min_confidence = 0.5
@@ -38,9 +35,15 @@ class CursorStabilizer:
             self.last_time = time.time()
             return raw_x, raw_y
             
+        from modules.calibration.config_manager import AdaptiveConfig
+        if self.adaptive_engine:
+            config = self.adaptive_engine.get_config()
+        else:
+            config = AdaptiveConfig()
+
         # 2. Jitter Prevention (Deadzone)
         dist = math.hypot(raw_x - self.prev_x, raw_y - self.prev_y)
-        if dist < self.deadzone:
+        if dist < config.cursor_deadzone:
             # Drop microscopic noisy movements, use previous
             return self.prev_x, self.prev_y
             
@@ -53,9 +56,7 @@ class CursorStabilizer:
         velocity = dist / dt
         
         # Increase alpha proportionally to velocity
-        # If moving fast (e.g. > 2000 pixels/sec), alpha approaches 1 (no smoothing, highly responsive)
-        # If moving slow, alpha stays near base_alpha (highly smoothed)
-        dynamic_alpha = self.base_alpha + (velocity / 2000.0)
+        dynamic_alpha = config.cursor_base_alpha + (velocity / 2000.0)
         alpha = max(0.05, min(1.0, dynamic_alpha))
         
         # 4. EMA Smoothing Formula
